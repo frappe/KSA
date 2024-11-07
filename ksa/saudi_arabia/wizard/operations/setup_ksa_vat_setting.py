@@ -12,6 +12,10 @@ def create_ksa_vat_setting(company):
 		account_data = json.load(json_file)
 
 	# Creating KSA VAT Setting
+	ksa_vat_setting_exists=frappe.db.exists("KSA VAT Setting", company.name)
+	if ksa_vat_setting_exists:
+		return
+		
 	ksa_vat_setting = frappe.get_doc({"doctype": "KSA VAT Setting", "company": company.name})
 
 	for data in account_data:
